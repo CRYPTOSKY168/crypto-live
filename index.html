@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚽ Football Live Score</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(90deg, #e94560, #0f3460);
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+        .live-badge {
+            display: inline-block;
+            background: #e94560;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .matches {
+            display: grid;
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .match-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .league {
+            font-size: 0.8em;
+            color: #e94560;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .teams {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+        }
+        .team {
+            text-align: center;
+            flex: 1;
+        }
+        .team-logo {
+            font-size: 2.5em;
+            margin-bottom: 8px;
+        }
+        .team-name {
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        .score {
+            font-size: 2em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #e94560, #ff6b6b);
+            padding: 10px 25px;
+            border-radius: 10px;
+            min-width: 100px;
+            text-align: center;
+        }
+        .match-time {
+            text-align: center;
+            color: #4ecca3;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        .odds {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .odd-btn {
+            background: rgba(78, 204, 163, 0.2);
+            border: 1px solid #4ecca3;
+            color: #4ecca3;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        .odd-btn:hover {
+            background: #4ecca3;
+            color: #1a1a2e;
+        }
+        .odd-label {
+            font-size: 0.7em;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .odd-value {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .stat-card {
+            background: rgba(233, 69, 96, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #e94560;
+        }
+        .stat-label {
+            font-size: 0.8em;
+            color: #888;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>⚽ FOOTBALL LIVE</h1>
+        <span class="live-badge">🔴 LIVE</span>
+    </div>
+
+    <div class="matches">
+        <!-- Match 1 -->
+        <div class="match-card">
+            <div class="league">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League</div>
+            <div class="teams">
+                <div class="team">
+                    <div class="team-logo">🔴</div>
+                    <div class="team-name">Liverpool</div>
+                </div>
+                <div class="score">2 - 1</div>
+                <div class="team">
+                    <div class="team-logo">🔵</div>
+                    <div class="team-name">Chelsea</div>
+                </div>
+            </div>
+            <div class="match-time">⏱️ 67'</div>
+            <div class="odds">
+                <div class="odd-btn">
+                    <span class="odd-label">เจ้าบ้าน</span>
+                    <span class="odd-value">1.45</span>
+                </div>
+                <div class="odd-btn">
+                    <span class="odd-label">เสมอ</span>
+                    <span class="odd-value">4.20</span>
+                </div>
+                <div class="odd-btn">
+                    <span class="odd-label">ทีมเยือน</span>
+                    <span class="odd-value">6.50</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Match 2 -->
+        <div class="match-card">
+            <div class="league">🇪🇸 La Liga</div>
+            <div class="teams">
+                <div class="team">
+                    <div class="team-logo">⚪</div>
+                    <div class="team-name">Real Madrid</div>
+                </div>
+                <div class="score">3 - 3</div>
+                <div class="team">
+                    <div class="team-logo">🔵🔴</div>
+                    <div class="team-name">Barcelona</div>
+                </div>
+            </div>
+            <div class="match-time">⏱️ 89'</div>
+            <div class="odds">
+                <div class="odd-btn">
+                    <span class="odd-label">เจ้าบ้าน</span>
+                    <span class="odd-value">2.10</span>
+                </div>
+                <div class="odd-btn">
+                    <span class="odd-label">เสมอ</span>
+                    <span class="odd-value">3.40</span>
+                </div>
+                <div class="odd-btn">
+                    <span class="odd-label">ทีมเยือน</span>
+                    <span class="odd-value">3.20</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Match 3 -->
+        <div class="match-card">
+            <div class="league">🇮🇹 Serie A</div>
+            <div class="teams">
+                <div class="team">
+                    <div class="team-logo">⚫🔵</div>
+                    <div class="team-name">Inter Milan</div>
+                </div>
+                <div class="score">1 - 0</div>
+                <div class="team">
+                    <div class="team-logo">🔴⚫</div>
+                    <div class="team-name">AC Milan</div>
+                </div>
+            </div>
+            <div class="match-time">⏱️ 34'</div>
+            <div class="odds">
+                <div class="odd-btn">
+                    <span class="odd-label">เจ้าบ้าน</span>
+                    <span class="odd-value">1.85</span>
+                </div>
+                <div class="odd-btn">
+                    <span class="odd-label">เสมอ</span>
+                    <span class="odd-value">3.60</span>
+                </div>
+                <div class="odd-btn">
+                    <span class="odd-label">ทีมเยือน</span>
+                    <span class="odd-value">4.00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-value">24</div>
+            <div class="stat-label">แมตช์วันนี้</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">8</div>
+            <div class="stat-label">กำลังแข่ง</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">67</div>
+            <div class="stat-label">ประตูรวม</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        ⚽ Football Live Score | Powered by OpenClaw AI 🦞
+    </div>
+
+    <script>
+        // Simulate live updates
+        setInterval(() => {
+            const times = document.querySelectorAll('.match-time');
+            times.forEach(t => {
+                const match = t.textContent.match(/(\d+)/);
+                if (match) {
+                    let min = parseInt(match[1]);
+                    if (min < 90) {
+                        t.textContent = `⏱️ ${min + 1}'`;
+                    }
+                }
+            });
+        }, 60000);
+    </script>
+</body>
+</html>
