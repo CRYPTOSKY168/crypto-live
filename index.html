@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚽ Football Live Score</title>
+    <title>🚀 Crypto Live - ราคา Crypto เรียลไทม์</title>
     <style>
         * {
             margin: 0;
@@ -12,285 +12,426 @@
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: #0d1117;
             min-height: 100vh;
-            color: white;
-            padding: 20px;
+            color: #e6edf3;
         }
         .header {
-            text-align: center;
+            background: linear-gradient(90deg, #1a1f2e 0%, #2d1f3d 100%);
             padding: 20px;
-            background: linear-gradient(90deg, #e94560, #0f3460);
-            border-radius: 15px;
-            margin-bottom: 20px;
+            border-bottom: 1px solid #30363d;
         }
-        .header h1 {
-            font-size: 2em;
-            margin-bottom: 5px;
-        }
-        .live-badge {
-            display: inline-block;
-            background: #e94560;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        .matches {
-            display: grid;
-            gap: 15px;
-            max-width: 800px;
+        .header-content {
+            max-width: 1200px;
             margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .match-card {
-            background: rgba(255,255,255,0.1);
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            background: linear-gradient(90deg, #f7931a, #627eea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .market-stats {
+            display: flex;
+            gap: 20px;
+            font-size: 0.85em;
+        }
+        .stat {
+            color: #8b949e;
+        }
+        .stat span {
+            color: #58a6ff;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .search-bar {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .search-bar input {
+            background: none;
+            border: none;
+            color: #e6edf3;
+            font-size: 1em;
+            width: 100%;
+            outline: none;
+        }
+        .crypto-table {
+            background: #161b22;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #30363d;
+        }
+        .table-header {
+            display: grid;
+            grid-template-columns: 50px 2fr 1fr 1fr 1fr 1fr;
+            padding: 15px 20px;
+            background: #1c2128;
+            font-size: 0.85em;
+            color: #8b949e;
+            border-bottom: 1px solid #30363d;
+        }
+        .crypto-row {
+            display: grid;
+            grid-template-columns: 50px 2fr 1fr 1fr 1fr 1fr;
+            padding: 15px 20px;
+            border-bottom: 1px solid #30363d;
+            align-items: center;
+            transition: background 0.2s;
+        }
+        .crypto-row:hover {
+            background: #1c2128;
+        }
+        .crypto-row:last-child {
+            border-bottom: none;
+        }
+        .rank {
+            color: #8b949e;
+            font-weight: bold;
+        }
+        .coin-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .coin-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+        }
+        .coin-name {
+            font-weight: bold;
+        }
+        .coin-symbol {
+            color: #8b949e;
+            font-size: 0.85em;
+        }
+        .price {
+            font-weight: bold;
+        }
+        .change-positive {
+            color: #3fb950;
+        }
+        .change-negative {
+            color: #f85149;
+        }
+        .market-cap, .volume {
+            color: #8b949e;
+        }
+        .mini-chart {
+            height: 40px;
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+        }
+        .mini-chart .bar {
+            width: 4px;
+            background: linear-gradient(to top, #3fb950, #56d364);
+            border-radius: 2px;
+        }
+        .mini-chart.negative .bar {
+            background: linear-gradient(to top, #f85149, #ff7b72);
+        }
+        .trending {
+            background: #161b22;
             border-radius: 15px;
             padding: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px;
+            border: 1px solid #30363d;
         }
-        .league {
-            font-size: 0.8em;
-            color: #e94560;
-            margin-bottom: 10px;
+        .trending h3 {
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
-        .teams {
+        .trending-coins {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 15px 0;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 10px;
         }
-        .team {
-            text-align: center;
-            flex: 1;
-        }
-        .team-logo {
-            font-size: 2.5em;
-            margin-bottom: 8px;
-        }
-        .team-name {
-            font-size: 0.9em;
-            font-weight: bold;
-        }
-        .score {
-            font-size: 2em;
-            font-weight: bold;
-            background: linear-gradient(135deg, #e94560, #ff6b6b);
-            padding: 10px 25px;
-            border-radius: 10px;
-            min-width: 100px;
-            text-align: center;
-        }
-        .match-time {
-            text-align: center;
-            color: #4ecca3;
-            font-size: 0.9em;
-            margin-top: 10px;
-        }
-        .odds {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-        .odd-btn {
-            background: rgba(78, 204, 163, 0.2);
-            border: 1px solid #4ecca3;
-            color: #4ecca3;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-        }
-        .odd-btn:hover {
-            background: #4ecca3;
-            color: #1a1a2e;
-        }
-        .odd-label {
-            font-size: 0.7em;
-            display: block;
-            margin-bottom: 5px;
-        }
-        .odd-value {
-            font-weight: bold;
-            font-size: 1.1em;
-        }
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 20px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .stat-card {
-            background: rgba(233, 69, 96, 0.2);
+        .trending-coin {
+            background: #1c2128;
             padding: 15px;
             border-radius: 10px;
+            min-width: 150px;
             text-align: center;
         }
-        .stat-value {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #e94560;
-        }
-        .stat-label {
-            font-size: 0.8em;
-            color: #888;
+        .trending-coin .icon {
+            font-size: 2em;
+            margin-bottom: 8px;
         }
         .footer {
             text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            color: #666;
-            font-size: 0.8em;
+            padding: 30px;
+            color: #8b949e;
+            font-size: 0.85em;
+        }
+        @media (max-width: 768px) {
+            .table-header, .crypto-row {
+                grid-template-columns: 40px 1.5fr 1fr 1fr;
+            }
+            .market-cap, .volume {
+                display: none;
+            }
+            .market-stats {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>⚽ FOOTBALL LIVE</h1>
-        <span class="live-badge">🔴 LIVE</span>
-    </div>
-
-    <div class="matches">
-        <!-- Match 1 -->
-        <div class="match-card">
-            <div class="league">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League</div>
-            <div class="teams">
-                <div class="team">
-                    <div class="team-logo">🔴</div>
-                    <div class="team-name">Liverpool</div>
-                </div>
-                <div class="score">2 - 1</div>
-                <div class="team">
-                    <div class="team-logo">🔵</div>
-                    <div class="team-name">Chelsea</div>
-                </div>
-            </div>
-            <div class="match-time">⏱️ 67'</div>
-            <div class="odds">
-                <div class="odd-btn">
-                    <span class="odd-label">เจ้าบ้าน</span>
-                    <span class="odd-value">1.45</span>
-                </div>
-                <div class="odd-btn">
-                    <span class="odd-label">เสมอ</span>
-                    <span class="odd-value">4.20</span>
-                </div>
-                <div class="odd-btn">
-                    <span class="odd-label">ทีมเยือน</span>
-                    <span class="odd-value">6.50</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Match 2 -->
-        <div class="match-card">
-            <div class="league">🇪🇸 La Liga</div>
-            <div class="teams">
-                <div class="team">
-                    <div class="team-logo">⚪</div>
-                    <div class="team-name">Real Madrid</div>
-                </div>
-                <div class="score">3 - 3</div>
-                <div class="team">
-                    <div class="team-logo">🔵🔴</div>
-                    <div class="team-name">Barcelona</div>
-                </div>
-            </div>
-            <div class="match-time">⏱️ 89'</div>
-            <div class="odds">
-                <div class="odd-btn">
-                    <span class="odd-label">เจ้าบ้าน</span>
-                    <span class="odd-value">2.10</span>
-                </div>
-                <div class="odd-btn">
-                    <span class="odd-label">เสมอ</span>
-                    <span class="odd-value">3.40</span>
-                </div>
-                <div class="odd-btn">
-                    <span class="odd-label">ทีมเยือน</span>
-                    <span class="odd-value">3.20</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Match 3 -->
-        <div class="match-card">
-            <div class="league">🇮🇹 Serie A</div>
-            <div class="teams">
-                <div class="team">
-                    <div class="team-logo">⚫🔵</div>
-                    <div class="team-name">Inter Milan</div>
-                </div>
-                <div class="score">1 - 0</div>
-                <div class="team">
-                    <div class="team-logo">🔴⚫</div>
-                    <div class="team-name">AC Milan</div>
-                </div>
-            </div>
-            <div class="match-time">⏱️ 34'</div>
-            <div class="odds">
-                <div class="odd-btn">
-                    <span class="odd-label">เจ้าบ้าน</span>
-                    <span class="odd-value">1.85</span>
-                </div>
-                <div class="odd-btn">
-                    <span class="odd-label">เสมอ</span>
-                    <span class="odd-value">3.60</span>
-                </div>
-                <div class="odd-btn">
-                    <span class="odd-label">ทีมเยือน</span>
-                    <span class="odd-value">4.00</span>
-                </div>
+        <div class="header-content">
+            <div class="logo">🚀 CryptoLive</div>
+            <div class="market-stats">
+                <div class="stat">Cryptos: <span>2.4M+</span></div>
+                <div class="stat">Market Cap: <span>$2.1T</span></div>
+                <div class="stat">24h Vol: <span>$89.2B</span></div>
+                <div class="stat">BTC Dominance: <span>52.4%</span></div>
             </div>
         </div>
     </div>
 
-    <div class="stats">
-        <div class="stat-card">
-            <div class="stat-value">24</div>
-            <div class="stat-label">แมตช์วันนี้</div>
+    <div class="container">
+        <div class="trending">
+            <h3>🔥 Trending</h3>
+            <div class="trending-coins">
+                <div class="trending-coin">
+                    <div class="icon">🟠</div>
+                    <div class="coin-name">Bitcoin</div>
+                    <div class="change-positive">+2.4%</div>
+                </div>
+                <div class="trending-coin">
+                    <div class="icon">💎</div>
+                    <div class="coin-name">Ethereum</div>
+                    <div class="change-positive">+3.1%</div>
+                </div>
+                <div class="trending-coin">
+                    <div class="icon">🐕</div>
+                    <div class="coin-name">Dogecoin</div>
+                    <div class="change-positive">+15.2%</div>
+                </div>
+                <div class="trending-coin">
+                    <div class="icon">🌙</div>
+                    <div class="coin-name">Solana</div>
+                    <div class="change-negative">-1.8%</div>
+                </div>
+                <div class="trending-coin">
+                    <div class="icon">🔵</div>
+                    <div class="coin-name">XRP</div>
+                    <div class="change-positive">+5.7%</div>
+                </div>
+            </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-value">8</div>
-            <div class="stat-label">กำลังแข่ง</div>
+
+        <div class="search-bar">
+            <span>🔍</span>
+            <input type="text" placeholder="ค้นหา crypto...">
         </div>
-        <div class="stat-card">
-            <div class="stat-value">67</div>
-            <div class="stat-label">ประตูรวม</div>
+
+        <div class="crypto-table">
+            <div class="table-header">
+                <div>#</div>
+                <div>ชื่อ</div>
+                <div>ราคา</div>
+                <div>24h %</div>
+                <div class="market-cap">Market Cap</div>
+                <div class="volume">Volume 24h</div>
+            </div>
+
+            <div class="crypto-row">
+                <div class="rank">1</div>
+                <div class="coin-info">
+                    <div class="coin-icon" style="background: #f7931a;">₿</div>
+                    <div>
+                        <div class="coin-name">Bitcoin</div>
+                        <div class="coin-symbol">BTC</div>
+                    </div>
+                </div>
+                <div class="price">$97,245.32</div>
+                <div class="change-positive">+2.41%</div>
+                <div class="market-cap">$1.92T</div>
+                <div class="volume">$28.5B</div>
+            </div>
+
+            <div class="crypto-row">
+                <div class="rank">2</div>
+                <div class="coin-info">
+                    <div class="coin-icon" style="background: #627eea;">Ξ</div>
+                    <div>
+                        <div class="coin-name">Ethereum</div>
+                        <div class="coin-symbol">ETH</div>
+                    </div>
+                </div>
+                <div class="price">$3,245.67</div>
+                <div class="change-positive">+3.12%</div>
+                <div class="market-cap">$390.2B</div>
+                <div class="volume">$15.8B</div>
+            </div>
+
+            <div class="crypto-row">
+                <div class="rank">3</div>
+                <div class="coin-info">
+                    <div class="coin-icon" style="background: #26a17b;">₮</div>
+                    <div>
+                        <div class="coin-name">Tether</div>
+                        <div class="coin-symbol">USDT</div>
+                    </div>
+                </div>
+                <div class="price">$1.00</div>
+                <div class="change-positive">+0.01%</div>
+                <div class="market-cap">$95.8B</div>
+                <div class="volume">$52.3B</div>
+            </div>
+
+            <div class="crypto-row">
+                <div class="rank">4</div>
+                <div class="coin-info">
+                    <div class="coin-icon" style="background: #2775ca;">◎</div>
+                    <div>
+                        <div class="coin-name">Solana</div>
+                        <div class="coin-symbol">SOL</div>
+                    </div>
+                </div>
+                <div class="price">$198.45</div>
+                <div class="change-negative">-1.82%</div>
+                <div class="market-cap">$85.4B</div>
+                <div class="volume">$3.2B</div>
+            </div>
+
+            <div class="crypto-row">
+                <div class="rank">5</div>
+                <div class="coin-info">
+                    <div class="coin-icon" style="background: #f0b90b;">B</div>
+                    <div>
+                        <div class="coin-name">BNB</div>
+                        <div class="coin-symbol">BNB</div>
+                    </div>
+                </div>
+                <div class="price">$625.89</div>
+                <div class="change-positive">+1.24%</div>
+                <div class="market-cap">$93.2B</div>
+                <div class="volume">$1.8B</div>
+            </div>
+
+            <div class="crypto-row">
+                <div class="rank">6</div>
+                <div class="coin-info">
+                    <div class="coin-icon" style="background: #23292f;">🔵</div>
+                    <div>
+                        <div class="coin-name">XRP</div>
+                        <div class="coin-symbol">XRP</div>
+                    </div>
+                </div>
+                <div class="price">$2.45</div>
+                <div class="change-positive">+5.67%</div>
+                <div class="market-cap">$126.8B</div>
+                <div class="volume">$8.9B</div>
+            </div>
+
+            <div class="crypto-row">
+                <div class="rank">7</div>
+                <div class="coin-info">
+                    <div class="coin-icon" style="background: #2775ca;">$</div>
+                    <div>
+                        <div class="coin-name">USD Coin</div>
+                        <div class="coin-symbol">USDC</div>
+                    </div>
+                </div>
+                <div class="price">$1.00</div>
+                <div class="change-positive">+0.00%</div>
+                <div class="market-cap">$42.1B</div>
+                <div class="volume">$6.2B</div>
+            </div>
+
+            <div class="crypto-row">
+                <div class="rank">8</div>
+                <div class="coin-info">
+                    <div class="coin-icon" style="background: #c3a634;">🐕</div>
+                    <div>
+                        <div class="coin-name">Dogecoin</div>
+                        <div class="coin-symbol">DOGE</div>
+                    </div>
+                </div>
+                <div class="price">$0.3245</div>
+                <div class="change-positive">+15.23%</div>
+                <div class="market-cap">$43.2B</div>
+                <div class="volume">$4.1B</div>
+            </div>
+
+            <div class="crypto-row">
+                <div class="rank">9</div>
+                <div class="coin-info">
+                    <div class="coin-icon" style="background: #0033ad;">💜</div>
+                    <div>
+                        <div class="coin-name">Cardano</div>
+                        <div class="coin-symbol">ADA</div>
+                    </div>
+                </div>
+                <div class="price">$0.9823</div>
+                <div class="change-positive">+4.56%</div>
+                <div class="market-cap">$34.5B</div>
+                <div class="volume">$892M</div>
+            </div>
+
+            <div class="crypto-row">
+                <div class="rank">10</div>
+                <div class="coin-info">
+                    <div class="coin-icon" style="background: #e84142;">A</div>
+                    <div>
+                        <div class="coin-name">Avalanche</div>
+                        <div class="coin-symbol">AVAX</div>
+                    </div>
+                </div>
+                <div class="price">$38.92</div>
+                <div class="change-negative">-2.34%</div>
+                <div class="market-cap">$14.8B</div>
+                <div class="volume">$521M</div>
+            </div>
         </div>
     </div>
 
     <div class="footer">
-        ⚽ Football Live Score | Powered by OpenClaw AI 🦞
+        🚀 CryptoLive | Powered by OpenClaw AI 🦞<br>
+        <small>ข้อมูลราคาเป็นตัวอย่าง ไม่ใช่ราคาจริง</small>
     </div>
 
     <script>
-        // Simulate live updates
+        // Simulate price updates
         setInterval(() => {
-            const times = document.querySelectorAll('.match-time');
-            times.forEach(t => {
-                const match = t.textContent.match(/(\d+)/);
-                if (match) {
-                    let min = parseInt(match[1]);
-                    if (min < 90) {
-                        t.textContent = `⏱️ ${min + 1}'`;
-                    }
+            document.querySelectorAll('.price').forEach(el => {
+                const currentPrice = parseFloat(el.textContent.replace(/[$,]/g, ''));
+                const change = (Math.random() - 0.5) * 0.001 * currentPrice;
+                const newPrice = currentPrice + change;
+                if (newPrice > 1000) {
+                    el.textContent = '$' + newPrice.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                } else if (newPrice > 1) {
+                    el.textContent = '$' + newPrice.toFixed(2);
+                } else {
+                    el.textContent = '$' + newPrice.toFixed(4);
                 }
             });
-        }, 60000);
+        }, 3000);
     </script>
 </body>
 </html>
